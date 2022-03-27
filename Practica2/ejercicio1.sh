@@ -1,19 +1,23 @@
 #!/bin/bash
 
-suma() {
-    let "$1 + $2" | bc
-}
-
-ps aux | sed -r -n -e ''
-
-echo "$user está haciendo un uso de cpu del $porcentaje"
-
-
-<< 'Comment'
-df | sed -r -n -e '2,$s/^[^ ]+[ ]+[^ ]+/Hola/p'
-
-
-df | sed -r -n -e '2,$s/^([a-Z0-9/:\\]+)[ ]+([0-9]+)[ ]+([0-9]+)[ ]+([0-9]+)[ ]+([0-9]+%)[ ]+([a-Z0-9/]+)/El sistema de ficheros \1, esta montado en \6, tiene un tamaño de \2 de los cuales se estan usando \3 que representan un porcentaje de \5 del total. Quedan libres \4./p'
-Comment
-
-echo
+# la salida de ps se pasa a sed
+# necesitamos las flags -rne: -r: utiliza ERE, -n: silencioso, -e: ejecutar comando
+# 1! hace que ignore la primera linea (que es el titulo de tabla)
+# los parentesis guardan la informacion
+# el . selecciona un caracter cualquiera
+# el * Selecciona ninguna, una o varias veces lo anterior
+# el $ nos lleva hasta el final de la linea
+# \1/ devuelve lo primero que guardes que los parentesis si pones 2 lo 2do...
+# el sort los ordena alfabeticamente
+# el uniq hace que no se repitan
+for user in $(ps aux | sed -rne '1!s/^([^ ]+).*$/\1/p' | sort | uniq);
+do
+    suma=0                                                      #Se crea una variable para ir almacenando la suma de los cpu
+    #este es igual pero para cada usuario guarda entre parentesis la 3ra columna y la vuelve a agrupar
+    for cpu in $(ps aux | sed -rne '1!s/^'$user'[ ]+[^ ]+[ ]+([^ ]+).*/\1/p' | sort | uniq);
+    do
+    #se le pasa a bc (calculadora en linea de comandos la expresion a calcular) y se guarda en la variable suma
+        suma=$(echo "$suma + $cpu" | bc)
+    done
+    echo "$user esta haciendo un uso de cpu del $suma%"         #Se muestra por pantalla el usuario y la cantidad en % que usa dicho usuario
+done
