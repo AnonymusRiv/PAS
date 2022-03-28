@@ -1,34 +1,31 @@
 #!/bin/bash
 
-#posibles alternativas para tener la latencia media
-#ping -c 4 www.stackoverflow.com | tail -1| awk '{print $4}' | cut -d '/' -f 2
-#ping -c 4 www.stackoverflow.com | tail -1| awk -F '/' '{print $5}'
-#ping -c 4 www.stackoverflow.com | sed '$!d;s|.*/\([0-9.]*\)/.*|\1|'
+#Realiza un script que reciba como argumento un fichero de texto que contendrá una serie de direcciones IP de servidores DNS y
+#realizará un ping a cada uno de ellos para comprobar la latencia media de los mismos. Además, se pasarán otros dos argumentos 
+#que indicarán el número de pings realizados a cada IP y el timeout.
+#Al final, se deberá mostrar una lista de las direcciones y el tiempo medio de respuesta de cada uno ordenados de forma ascendente por el tiempo. 
+#Si alguna dirección no ha respondido en el tiempo indicado, se deberá mostrar al final de la lista.
 
-fichero="$1"
-numero_pings="$2"
-timeout="$3"
-
-if [ $# -ne 3 ] || [ ! -e $fichero ]
+if [ $# != 3 ]
 then
-    echo "Argumentos incorrecto. Uso: ./ejercicio2.sh <archivo_ips> <número_ping> <timeout>"
-    exit
+    echo "Número de parámetros incorrecto"
+else
+    for ip in $(cat $1)
+    do
+        for avgLat in $(ping -c $2 -W $3 -q $ip | grep '^r' | awk -F/ '{print$5}')
+        do
+            echo "$ip tiene una latencia media de $avgLat ms"
+        done
+    done | sort -n -k 7
+    for ip in $(cat $1)
+    do
+        for ping in $(ping -c $2 -W $3 $ip)
+        do
+            if [ $? != 0 ]
+            then
+                echo -e "\nLa IP $ip no respondió en $3 segundos"
+            fi
+        done
+    done
+    
 fi
-
-#IFS= read -r line
-for ip in $(cat $fichero) #guarda en $ip cada linea del fichero $fichero
-do
-    #el comando ping nos da mucha informacion
-    #con tail -1 nos quedamos solo con la ultima linea
-    #awk te permite sacar la columna que quieras separada por el caracter que esta entre comillas
-        #si tienes rtt min/avg/max/mdev = 15.392/23.753/42.119/10.922
-        #         |---$1--|$2-|-$3|-----$4------|--$5--|--$6--|--$7--|
-    pig=$(ping -c $numero_pings -W $timeout $ip | tail -1| awk -F '/' '{print $5}')
-
-    if [[ $pig < $timeout ]] # no se porque pero hay que poner dobles corchetes
-    then
-        echo "La IP $ip no respondió en $timeout segundos"
-    else
-        echo "$ip $pig ms"
-    fi
-done

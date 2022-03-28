@@ -1,12 +1,17 @@
 #!/bin/bash
-cho -e "\n1) Mostrar los usuarios que tengan un intM-CM-)rprete de comandos vM-CM-!lido asignado\n"
-grep -w 'bash\|sh' /etc/passwd
-echo -e "\n2) Mostrar los usuarios que tengan un home vM-CM-!lido asignado\n"
-grep -v nonexistent /etc/passwd
-echo -e "\n3) Mostrar los usuarios y el nombre de su grupo en dos columnas\n"
-echo "Usuario                              Grupo"
-echo "=========================================="
-while IFS=: read -r f1 f2 f3 f4 f5 f6 f7
-do
-    printf "%20s %20s\n" $f1 $f5
-done < /etc/passwd
+
+echo "1) Usuarios del grupo 46"
+echo
+cat /etc/passwd|grep -E "^[^ ]+:[^ ]+:[^ ]+:46"
+echo
+echo "2) Usuarios de los grupos 33,34 o 38"
+echo
+cat /etc/passwd|grep -E "^[^ ]+:[^ ]+:[^ ]+:(33|34|38)"
+echo
+echo "3) Usuarios con un UID de 4 digitos"
+echo
+cat /etc/passwd|grep -E "^[^ ]+:[^ ]+:[0-9]{4}:"
+echo
+echo "4) Usuarios con nombres de 4 caracteres"
+echo
+cat /etc/passwd|grep -E "^[^ :]{4,4}:"
