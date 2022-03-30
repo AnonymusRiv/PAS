@@ -8,7 +8,7 @@
 
 if [ $# != 3 ]
 then
-    echo "Número de parámetros incorrecto"
+    echo "Número de parámetros incorrecto. Uso: ./ejercicio2.sh <archivo_de_texto> <pings> <timeout>"
 else
     for ip in $(cat $1)
     do
