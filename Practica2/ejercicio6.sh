@@ -9,7 +9,7 @@ else
     echo -e "\n2) Sistemas de ficheros cuyo porcentaje de uso sea inferior al 10%:"
     df | grep -Eo "^[^ ]+[ ]+[^ ]+[ ]+[^ ]+[ ]+[^ ]+[ ]+[0-9]{1}%+.*" | sort
     echo -e "\n3) Sistema de ficheros cuyo porcentaje de uso sea de al menos el 90%:"
-    df | grep  -Eo "^[^ ]+[ ]+[^ ]+[ ]+[^ ]+[ ]+[^ ]+[ ]+9[0-9]{1}%+.*" | sort
+    df | grep -Eo "^[^ ]+[ ]+[^ ]+[ ]+[^ ]+[ ]+[^ ]+[ ]+9[0-9]{1}%+.*" | sort
 fi
 
 

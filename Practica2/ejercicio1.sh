@@ -16,8 +16,7 @@ do
     #este es igual pero para cada usuario guarda entre parentesis la 3ra columna y la vuelve a agrupar
     for cpu in $(ps aux | sed -rne '1!s/^'$user'[ ]+[^ ]+[ ]+([^ ]+).*/\1/p' | sort | uniq);
     do
-    #se le pasa a bc (calculadora en linea de comandos la expresion a calcular) y se guarda en la variable suma
-        suma=$(echo "$suma + $cpu" | bc)
+        suma=$(echo "$suma + $cpu" | bc)                        #se le pasa a bc (calculadora en linea de comandos la expresion a calcular) y se guarda en la variable suma
     done
     echo "$user esta haciendo un uso de cpu del $suma%"         #Se muestra por pantalla el usuario y la cantidad en % que usa dicho usuario
 done

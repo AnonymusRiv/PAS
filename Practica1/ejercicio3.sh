@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Desarrolla un script que permita realizar una copia de seguridad de un determinado directorio y almacenarla en un fichero comprimido. 
+#Desarrolla un script que permita realizar una copia de seguridad de un determinado directorio y almacenarla en un fichero comprimido.
 #El programa deberá recibir dos argumentos:
 ##1. Directorio que se va a copiar.
 ##2. Directorio donde se almacenará la copia comprimida.
@@ -19,9 +19,9 @@ then
         then
             echo "Ya se ha realizado esta copia hoy ($2/$nameZip)"
         else
-            tar -czf $nameZip $1/*  #Comprime el directorio y todo su contenido. 
+            tar -czf $nameZip $1/*  #Comprime el directorio y todo su contenido.
                                     #Comando tar: c=crear un nuevo archivo .tar  v=mostrar descripción del progreso  f=nombre del archivo  z=compresión gzip
-            mv $nameZip $2/ #Mueve el comprimido al directorio destino
+            mv $nameZip $2/         #Mueve el comprimido al directorio destino
             echo -e "Copia realizada en $2/$nameZip"
         fi
     else #Si no existe el directorio destino

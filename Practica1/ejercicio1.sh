@@ -18,12 +18,12 @@ longitud="$3"
 
 extensiones=( ".sh" ".html" ".key" ".txt" )         #array de elementos que serán las terminaciones de los archivos
 
-random () {         #función que genera nombres aleatorios
+random () {                                         #función que genera nombres aleatorios
     tr -dc A-Za-z0-9 < /dev/urandom | head -c $longitud
 }
 
 
-if [ $# -ne 3 ] #comprueba si el número de argumentos pasados por línea de comandos es 3
+if [ $# -ne 3 ]                                     #comprueba si el número de argumentos pasados por línea de comandos es 3
 then
     echo "Argumentos incorrecto. Uso: ./ejercicio1.sh <ruta_directorio> <num_subdirectorios> <longitud>"
     exit
@@ -32,7 +32,7 @@ fi
 if [ -d $ruta ]
 then
     echo "¿Quiere eliminar la carpeta:? s/n"
-    read  -s -n1 confirmacion
+    read  -s -n1 confirmacion                       #-s no hace echo de la entrada y -n1 es porque espera 1 caracter
     if [ $confirmacion == "s" ]
     then
         rm -r $ruta
@@ -47,7 +47,7 @@ for ((i=0; $i<$subdirectorios; i=$i+1))
 do
     nombre="$(random)"
     mkdir $ruta$nombre
-    for ext in ${extensiones[*]}
+    for ext in ${extensiones[*]}                    #para que tengan todas las extensiones
     do
         touch $ruta$nombre/$(random)$ext
     done

@@ -6,11 +6,11 @@ echo "$(cat /etc/group | grep -Eo '^[^ ]+:[^ ]+:[^ ]+:[^ ]+')"
 echo
 echo "2) Grupos cuyo nombre empiece por u y acabe por s"
 echo
-echo "$(cat /etc/group | grep -Eo '^u.*s:[^_]:.*$')"
+echo "$(cat /etc/group | grep -Eo '^u.*s:[^_]:.*$')"                #.[que haya algo]/1
 echo
 echo "3) Grupos que no contengan ningún usuario adicional"
 echo
-echo "$(cat /etc/group | grep -Eo '^[^ ]+:[^ ]+:[^ ]+:$')"
+echo "$(cat /etc/group | grep -Eo '^[^ ]+:[^ ]+:[^ ]+:$')"          #./1[que haya algo]
 echo
 echo "4) Grupos con GID menor que 100"
 echo

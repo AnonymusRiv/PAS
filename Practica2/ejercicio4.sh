@@ -2,7 +2,7 @@
 
 echo "1) Usuarios del grupo 46"
 echo
-cat /etc/passwd|grep -E "^[^ ]+:[^ ]+:[^ ]+:46"
+cat /etc/passwd|grep -E "^[^ ]+:[^ ]+:[^ ]+:46"             #busca en el fichero los nombres que cumplen con esa característica
 echo
 echo "2) Usuarios de los grupos 33,34 o 38"
 echo

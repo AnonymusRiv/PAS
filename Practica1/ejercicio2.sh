@@ -30,7 +30,7 @@ then
         chmod 700 $1$i/*.key #Mismos permisos a todos los .key
         echo $1$i/*.key
     done
-else   
+else
     echo "El directorio insertado no existe"
 fi
 

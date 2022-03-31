@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #Realiza un script que reciba como argumento un fichero de texto que contendrá una serie de direcciones IP de servidores DNS y
-#realizará un ping a cada uno de ellos para comprobar la latencia media de los mismos. Además, se pasarán otros dos argumentos 
+#realizará un ping a cada uno de ellos para comprobar la latencia media de los mismos. Además, se pasarán otros dos argumentos
 #que indicarán el número de pings realizados a cada IP y el timeout.
-#Al final, se deberá mostrar una lista de las direcciones y el tiempo medio de respuesta de cada uno ordenados de forma ascendente por el tiempo. 
+#Al final, se deberá mostrar una lista de las direcciones y el tiempo medio de respuesta de cada uno ordenados de forma ascendente por el tiempo.
 #Si alguna dirección no ha respondido en el tiempo indicado, se deberá mostrar al final de la lista.
 
 if [ $# != 3 ]
@@ -27,5 +27,4 @@ else
             fi
         done
     done
-    
 fi
