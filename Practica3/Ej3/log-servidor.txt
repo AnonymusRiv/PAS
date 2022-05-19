@@ -1,0 +1,12 @@
+[2022-05-15, 22:14:49] ==> [Servidor]: El nombre de la cola es: /server_queue-anonymusriv
+
+[2022-05-15, 22:14:49] ==> [Servidor]: El nombre de la cola del cliente es: /client_queue-anonymusriv
+
+[2022-05-15, 22:14:49] ==> [Servidor]: El descriptor de la cola de servidor es: 3
+
+[2022-05-15, 22:14:49] ==> [Servidor]: El descriptor de la cola de cliente es: 4
+
+[2022-05-15, 22:14:53] ==> [Servidor]: Recibido el mensaje: hola
+
+[2022-05-15, 22:14:57] ==> [Servidor]: Recibido el mensaje: adios
+
